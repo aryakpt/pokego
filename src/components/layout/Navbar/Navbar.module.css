@@ -1,0 +1,27 @@
+.navbar {
+  background-color: var(--primary-color);
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  color: var(--white);
+}
+
+.navbar-link {
+  font-weight: 600;
+  color: var(--white);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.navbar-link:hover {
+  color: whitesmoke;
+}

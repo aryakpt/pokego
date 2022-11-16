@@ -1,0 +1,14 @@
+:root {
+  --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  --white: #ffffff;
+  --black: #000000;
+  --primary-color: orange;
+}
+
+* {
+  font-family: var(--font-primary);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

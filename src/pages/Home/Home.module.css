@@ -1,0 +1,23 @@
+.home {
+  display: flex;
+  gap: 2rem;
+}
+
+.home__form {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.home__pokemon-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  list-style: none;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.home__pagination {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
