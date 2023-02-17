@@ -1,15 +1,19 @@
 import './styles/global.css';
 import { Home, Detail } from './pages';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './services/store';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/detail/:pokemonName" element={<Detail />} />
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/detail/:pokemonName" element={<Detail />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   );
 }
 

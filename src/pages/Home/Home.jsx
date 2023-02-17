@@ -1,27 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { DefaultLayout, Container } from '../../components/layout';
 import { PokemonCard } from '../../components/home';
 import styles from './Home.module.css';
-import pokeApi from '../../api/pokeApi';
+
+import { useGetPokemonsQuery } from '../../services/slices/pokemonSlice';
+import { SplashScreen } from '../../components';
 
 const Home = () => {
-  const [pokemons, setPokemons] = useState({ next: null, previous: null, results: [] });
   const [searchPokemonName, setSearchPokemonName] = useState('');
+  const [offset, setOffset] = useState(0);
+  const [limit, setLimit] = useState(20);
+  const { data: pokemons, isLoading } = useGetPokemonsQuery(offset, limit);
 
-  const getPokemons = async () => {
-    const data = await pokeApi.getPokemons();
-    setPokemons({ next: data.next, previous: data.previous, results: data.results });
-  };
-
-  const getNextPrevPokemons = async (url) => {
-    const data = await pokeApi.getNextPrevPokemons(url);
-    setPokemons({ next: data.next, previous: data.previous, results: data.results });
-  };
-
-  useEffect(() => {
-    getPokemons();
-  }, []);
-
+  if (isLoading) return <SplashScreen />;
   return (
     <DefaultLayout>
       <Container>
@@ -44,13 +35,10 @@ const Home = () => {
             })}
         </ul>
         <div className={styles['home__pagination']}>
-          <button
-            onClick={() => getNextPrevPokemons(pokemons.previous)}
-            disabled={!pokemons.previous}
-          >
+          <button onClick={() => setOffset((prev) => prev - 20)} disabled={!pokemons.previous}>
             Previous
           </button>
-          <button onClick={() => getNextPrevPokemons(pokemons.next)} disabled={!pokemons.next}>
+          <button onClick={() => setOffset((prev) => prev + 20)} disabled={!pokemons.next}>
             Next
           </button>
         </div>
