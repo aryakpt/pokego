@@ -1,0 +1,43 @@
+.search__bar_container {
+  position: relative;
+  display: inline-block;
+}
+
+.search__bar {
+  background: var(--primary-color);
+  border: 7px solid var(--primary-blue);
+  border-radius: 45px;
+  min-height: 50px;
+  width: 300px;
+  min-width: 250px;
+  padding-inline: 20px;
+  outline: none;
+  color: var(--primary-blue);
+  font-weight: 500;
+}
+
+.search__bar::placeholder {
+  font-weight: 400;
+}
+
+.search__bar_container img {
+  position: absolute;
+  right: 5px;
+  top: 10%;
+  width: 40px;
+  transition: all 0.3s;
+}
+
+.search__bar_container img:hover {
+  animation: spin 0.5s linear infinite;
+  color: var(--primary-blue);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,9 +1,14 @@
 :root {
-  --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-primary: 'Tilt Neon', cursive;
 
   --white: #ffffff;
   --black: #000000;
-  --primary-color: orange;
+  --primary-color: #ffcb05;
+  --primary-blue: #2a75bb;
+  --secondary-purple: #d4d3dc;
+  --secondary-yellow: #eeeebb;
+  --tertary-purple: #e4e3e6;
+  --tertary-yellow: #e9e9d4;
 }
 
 * {
@@ -11,4 +16,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body {
+  background: linear-gradient(to right, var(--tertary-yellow), var(--tertary-purple));
 }

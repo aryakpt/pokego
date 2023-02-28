@@ -1,3 +1,3 @@
 import SplashScreen from './ui/SplashScreen';
-
-export { SplashScreen };
+import SearchBar from './ui/SearchBar/SearchBar';
+export { SplashScreen, SearchBar };

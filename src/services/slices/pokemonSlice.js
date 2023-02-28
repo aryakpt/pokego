@@ -6,7 +6,7 @@ export const pokemonApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: apiConfig.POKEAPI_BASE_URL }),
   endpoints: (builder) => ({
     getPokemons: builder.query({
-      query: (offset = 20, limit = 20) => `pokemon/?offset=${offset}&limit=${limit}`,
+      query: ({ offset, limit }) => `pokemon/?offset=${offset}&limit=${limit}`,
     }),
     getPokemonByName: builder.query({
       query: (name) => `pokemon/${name}`,
