@@ -28,7 +28,8 @@
   transition: all 0.3s;
 }
 
-.search__bar_container img:hover {
+.search__bar_container:hover img,
+.search__bar_container:focus img {
   animation: spin 0.5s linear infinite;
   color: var(--primary-blue);
 }

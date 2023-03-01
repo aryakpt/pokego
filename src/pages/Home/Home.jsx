@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 import styles from './Home.module.css';
-import { DefaultLayout, Container } from '../../components/layout';
-import { SplashScreen, SearchBar } from '../../components';
+import { Container } from '../../components/layout';
+import { SearchBar, Button } from '../../components';
 import { PokemonCard } from '../../components/home';
 import { PokemonLogo } from '../../assets/logo';
 
@@ -39,12 +39,24 @@ const Home = () => {
         </ul>
       </div>
       <div className={styles['home__pagination']}>
-        <button onClick={() => setOffset((prev) => prev - limit)} disabled={!pokemons?.previous}>
+        <Button
+          type="primary"
+          defaultProps={{
+            onClick: () => setOffset((prev) => prev - limit),
+            disabled: !pokemons?.previous,
+          }}
+        >
           Previous
-        </button>
-        <button onClick={() => setOffset((prev) => prev + limit)} disabled={!pokemons?.next}>
+        </Button>
+        <Button
+          type="primary"
+          defaultProps={{
+            onClick: () => setOffset((prev) => prev + limit),
+            disabled: !pokemons?.next,
+          }}
+        >
           Next
-        </button>
+        </Button>
       </div>
     </Container>
   );

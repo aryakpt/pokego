@@ -1,6 +1,6 @@
 .header {
   text-align: center;
-  padding-block: 40px;
+  padding-block: 30px;
   transform-origin: center center;
 }
 
@@ -9,14 +9,9 @@
   min-width: 30%;
 }
 
-.home {
-  display: flex;
-  gap: 2rem;
-}
-
 .home__form {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 }
 
 .home__pokemon-list {
