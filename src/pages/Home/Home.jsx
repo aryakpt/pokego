@@ -14,9 +14,8 @@ const Home = () => {
   const [limit, setLimit] = useState(12);
   const { data: pokemons, isLoading } = useGetPokemonsQuery({ offset, limit });
 
-  if (isLoading) return <SplashScreen />;
   return (
-    <Container>
+    <Container isAPILoading={isLoading}>
       <header className={styles.header}>
         <img src={PokemonLogo} alt="asdas" />
       </header>
@@ -32,7 +31,7 @@ const Home = () => {
       </div>
       <div>
         <ul className={styles['home__pokemon-list']}>
-          {pokemons.results
+          {pokemons?.results
             .filter((pokemon) => pokemon.name.toLowerCase().match(searchPokemonName.toLowerCase()))
             .map((pokemon, idx) => {
               return <PokemonCard key={idx} pokemon={pokemon} />;
@@ -40,10 +39,10 @@ const Home = () => {
         </ul>
       </div>
       <div className={styles['home__pagination']}>
-        <button onClick={() => setOffset((prev) => prev - limit)} disabled={!pokemons.previous}>
+        <button onClick={() => setOffset((prev) => prev - limit)} disabled={!pokemons?.previous}>
           Previous
         </button>
-        <button onClick={() => setOffset((prev) => prev + limit)} disabled={!pokemons.next}>
+        <button onClick={() => setOffset((prev) => prev + limit)} disabled={!pokemons?.next}>
           Next
         </button>
       </div>
