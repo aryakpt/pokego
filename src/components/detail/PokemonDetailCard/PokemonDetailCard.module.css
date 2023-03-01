@@ -1,25 +1,126 @@
 .pokemon-detail-card {
-  border: 1px solid black;
-  border-radius: 5px;
-  width: 500px;
+  border-radius: 10px;
+  width: 1000px;
   max-width: 100%;
   box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
   padding: 20px 30px;
+  background: linear-gradient(to right, rgb(236, 236, 236), var(--secondary-purple));
+
+  display: flex;
+  gap: 2rem;
+
+  position: relative;
+}
+
+.backdrop {
+  position: absolute;
+  right: -100px;
+  top: -200px;
+  filter: grayscale(40%) blur(10px);
+}
+
+.backdrop img {
+  width: 1000px;
 }
 
 .pokemon-detail-card__header {
-  text-align: center;
+  background-color: white;
+  box-shadow: 0px 0px 4px 2px rgb(228, 228, 228);
+  border-radius: 20px;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-inline: 20px;
+  position: relative;
+}
+
+.order {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 120px;
+  color: rgb(190, 190, 190);
+  filter: blur(3px);
+}
+
+.detail-fisik {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 4px 2px rgb(228, 228, 228);
+  font-size: 12px;
+}
+
+.height {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+}
+
+.weight {
+  position: absolute;
+  top: -10px;
+  right: -10px;
 }
 
 .pokemon-detail-card__header img {
+  height: 50%;
   width: 50%;
+  object-fit: contain;
+  margin-inline: auto;
+  z-index: 1;
 }
 
-.pokemon-detail-card__body__title {
+.ability__item {
+  padding: 5px;
+  border-radius: 5px;
+  background-color: var(--tertary-purple);
+  font-size: 12px;
+  z-index: 1;
+}
+
+.pokemon-detail-card__header__title {
   text-align: center;
   color: var(--primary-color);
+  z-index: 1;
 }
 
-.pokemon-detail-card__body__detail {
-  margin-block: 20px;
+.pokemon-detail-card__header__detail {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+  z-index: 1;
+  margin-bottom: 1rem;
+}
+
+.pokemon-detail-card__header__detail p {
+  font-size: 14px;
+  z-index: 1;
+}
+
+.abilities__list {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.elements img {
+  width: 15%;
+}
+
+.pokemon-detail-card__body {
+  width: 60%;
+  height: 100%;
+}
+.pokemon-detail-card__body button {
+  margin-top: 20px;
+  float: right;
 }
