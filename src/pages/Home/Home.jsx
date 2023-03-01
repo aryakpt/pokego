@@ -24,17 +24,18 @@ const Home = () => {
           <SearchBar
             type="text"
             value={searchPokemonName}
-            placeholder="Search pokemon..."
+            placeholder="Search pokemon just in this page..."
             onChange={(e) => setSearchPokemonName(e.target.value)}
           />
         </form>
       </div>
-      <div>
+      <div className={styles['home__pokemon-list__section']}>
         <ul className={styles['home__pokemon-list']}>
           {pokemons?.results
             .filter((pokemon) => pokemon.name.toLowerCase().match(searchPokemonName.toLowerCase()))
             .map((pokemon, idx) => {
-              return <PokemonCard key={idx} pokemon={pokemon} />;
+              if (pokemon) return <PokemonCard key={idx} pokemon={pokemon} />;
+              return 'Not Found';
             })}
         </ul>
       </div>

@@ -14,18 +14,22 @@
   margin-bottom: 3rem;
 }
 
+.home__pokemon-list__section {
+  min-height: 500px;
+}
+
 .home__pokemon-list {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   list-style: none;
   gap: 2rem;
-  margin-bottom: 2rem;
 }
 
 .home__pagination {
   display: flex;
   justify-content: center;
-  gap: 5px;
+  gap: 10px;
+  margin-top: 2rem;
 }
 
 @media (min-width: 600px) {

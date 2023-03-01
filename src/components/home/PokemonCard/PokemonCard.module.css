@@ -38,6 +38,11 @@
   text-transform: uppercase;
 }
 
+.pokemon-card__element {
+  display: flex;
+  gap: 10px;
+}
+
 .pokemon-card__element-detail {
   max-width: 30px;
 }
