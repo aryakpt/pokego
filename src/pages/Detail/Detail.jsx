@@ -1,23 +1,20 @@
 import { useParams } from 'react-router-dom';
-import { DefaultLayout, Container } from '../../components/layout';
+import { Container } from '../../components/layout';
 import { PokemonDetailCard } from '../../components/detail';
-
+import styles from './Detail.module.css';
 import { useGetPokemonByNameQuery } from '../../services/slices/pokemonSlice';
 
 const Detail = () => {
   const { pokemonName } = useParams();
-  const { data: pokemon, isLoading } = useGetPokemonByNameQuery(pokemonName);
+  const { data: pokemon, isFetching } = useGetPokemonByNameQuery(pokemonName);
 
-  if (!isLoading)
-    return (
-      <DefaultLayout>
-        <Container>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <PokemonDetailCard pokemon={pokemon} />
-          </div>
-        </Container>
-      </DefaultLayout>
-    );
+  return (
+    <Container isApiLoading={isFetching}>
+      <div className={styles['detail__page']}>
+        <PokemonDetailCard pokemon={pokemon} />
+      </div>
+    </Container>
+  );
 };
 
 export default Detail;

@@ -20,4 +20,5 @@
 
 body {
   background: linear-gradient(to right, var(--tertary-yellow), var(--tertary-purple));
+  overflow-x: hidden;
 }
