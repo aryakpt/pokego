@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import { Link } from 'react-router-dom';
 import styles from './PokemonDetailCard.module.css';
 import {
@@ -11,15 +10,24 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+
+import { capitalizeFirstLetter } from '../../../utils';
+
+import { Elements } from '../../../constants/elements';
+
+import { Button } from '../../';
+
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const PokemonDetailCard = ({ pokemon }) => {
   const dataChart = {
-    labels: pokemon.stats.map((stat) => stat.stat.name),
+    labels: pokemon?.stats.map((stat) =>
+      capitalizeFirstLetter(stat.stat.name.split('-').join(' '))
+    ),
     datasets: [
       {
         label: 'Pokemon Statictic',
-        data: pokemon.stats.map((stat) => stat.base_stat),
+        data: pokemon?.stats.map((stat) => stat.base_stat),
         backgroundColor: 'orange',
       },
     ],
@@ -31,37 +39,74 @@ const PokemonDetailCard = ({ pokemon }) => {
   };
 
   return (
-    <div className={styles['pokemon-detail-card']}>
-      <div className={styles['pokemon-detail-card__header']}>
+    <>
+      <div className={styles.backdrop}>
         <img
           src={
-            pokemon.sprites.front_default
-              ? pokemon.sprites.front_default
-              : pokemon.sprites.front_shiny
+            pokemon?.sprites?.back_default
+              ? pokemon?.sprites?.back_default
+              : pokemon?.sprites?.back_shiny
           }
-          alt="image not found"
+          alt="not found"
         />
       </div>
-      <div className={styles['pokemon-detail-card__body']}>
-        <h2 className={styles['pokemon-detail-card__body__title']}>{pokemon.name.toUpperCase()}</h2>
-        <div className={styles['pokemon-detail-card__body__detail']}>
-          <p>
-            Abilities:{' '}
-            {pokemon.abilities
-              .map((ability) => {
-                return ability.ability.name;
-              })
-              .join(', ')}
-          </p>
-          <p>Height: {pokemon.height}</p>
-          <p>Species: {pokemon.species.name}</p>
-          <Bar data={dataChart} options={optionsChart} />
+      <div className={styles['pokemon-detail-card']}>
+        <div className={styles['pokemon-detail-card__header']}>
+          <img
+            src={
+              pokemon?.sprites?.front_default
+                ? pokemon?.sprites?.front_default
+                : pokemon?.sprites?.front_shiny
+            }
+            alt="not found"
+          />
+          <div>
+            <span className={styles.order}>#{pokemon?.order}</span>
+            <span className={`${styles['detail-fisik']} ${styles.height}`}>
+              {pokemon?.height} inch
+            </span>
+            <span className={`${styles['detail-fisik']} ${styles.weight}`}>
+              {pokemon?.weight} lbs
+            </span>
+            <h3 className={styles['pokemon-detail-card__header__title']}>
+              {pokemon?.name.toUpperCase()}
+            </h3>
+            <div className={styles['pokemon-detail-card__header__detail']}>
+              <div className={styles['abilities__list']}>
+                {pokemon?.abilities.map((ability) => {
+                  return (
+                    <span key={ability.ability.name} className={styles['ability__item']}>
+                      {capitalizeFirstLetter(ability.ability.name)}
+                    </span>
+                  );
+                })}
+              </div>
+              <p>Species: {pokemon?.species?.name}</p>
+              <div className={styles.elements}>
+                {pokemon?.types.map((type) => {
+                  return (
+                    <img
+                      key={type.type.name}
+                      className={styles.element}
+                      src={Elements[type.type.name]}
+                      alt="Pokemon element"
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={styles['pokemon-detail-card__body']}>
+          <div className={styles['pokemon-detail-card__body__chart']}>
+            <Bar data={dataChart} options={optionsChart} />
+          </div>
+          <Link to={'/'} style={{ textDecoration: 'none' }}>
+            <Button type="primary">Back</Button>
+          </Link>
         </div>
       </div>
-      <div>
-        <Link to={'/'}>Back</Link>
-      </div>
-    </div>
+    </>
   );
 };
 

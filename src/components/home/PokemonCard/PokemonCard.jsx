@@ -1,47 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useGetPokemonByNameQuery } from '../../../services/slices/pokemonSlice';
 import styles from './PokemonCard.module.css';
-import {
-  BugElement,
-  DarkElement,
-  DragonElement,
-  ElectricElement,
-  FairyElement,
-  FightingElement,
-  FireElement,
-  FlyingElement,
-  GhostElement,
-  GrassElement,
-  GroundElement,
-  IceElement,
-  NormalElement,
-  PoisonElement,
-  PsychicElement,
-  SteelElement,
-  RockElement,
-  WaterElement,
-} from '../../../assets/logo';
-
-const Elements = {
-  bug: BugElement,
-  dark: DarkElement,
-  dragon: DragonElement,
-  electric: ElectricElement,
-  fairy: FairyElement,
-  fighting: FightingElement,
-  fire: FireElement,
-  flying: FlyingElement,
-  ghost: GhostElement,
-  grass: GrassElement,
-  ground: GroundElement,
-  ice: IceElement,
-  normal: NormalElement,
-  poison: PoisonElement,
-  psychic: PsychicElement,
-  steel: SteelElement,
-  rock: RockElement,
-  water: WaterElement,
-};
+import { Elements } from '../../../constants/elements';
 
 const PokemonCard = ({ pokemon }) => {
   const { data, isFetching } = useGetPokemonByNameQuery(pokemon.name);
