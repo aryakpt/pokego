@@ -44,16 +44,16 @@ const Elements = {
 };
 
 const PokemonCard = ({ pokemon }) => {
-  const { data, isLoading } = useGetPokemonByNameQuery(pokemon.name);
+  const { data, isFetching } = useGetPokemonByNameQuery(pokemon.name);
 
-  if (!isLoading)
+  if (!isFetching)
     return (
       <li>
         <Link to={`/detail/${pokemon.name}`} className={styles['pokemon-card']}>
           <img src={data.sprites.front_default} alt="not found" />
           <div className={styles['pokemon-card__detail']}>
             <p className={styles['pokemon-card__name']}>{pokemon.name}</p>
-            <div className={data?.types.length > 1 ? styles['pokemon-card__element'] : ''}>
+            <div className={styles['pokemon-card__element']}>
               {data?.types.map((type, idx) => {
                 if (idx < 4) {
                   return (
@@ -65,6 +65,7 @@ const PokemonCard = ({ pokemon }) => {
                     />
                   );
                 }
+                return null;
               })}
             </div>
           </div>
