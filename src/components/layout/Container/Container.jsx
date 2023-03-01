@@ -2,10 +2,10 @@
 import styles from './Container.module.css';
 import SplashScreen from '../../ui/SplashScreen/SplashScreen';
 
-const Container = ({ children, isAPILoading }) => {
+const Container = ({ children, isApiLoading = false }) => {
   return (
     <>
-      {isAPILoading && <SplashScreen />}
+      {isApiLoading && <SplashScreen />}
       <div className={styles.container}>{children}</div>
     </>
   );

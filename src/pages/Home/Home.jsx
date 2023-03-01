@@ -15,7 +15,7 @@ const Home = () => {
   const { data: pokemons, isLoading } = useGetPokemonsQuery({ offset, limit });
 
   return (
-    <Container isAPILoading={isLoading}>
+    <Container isApiLoading={isLoading}>
       <header className={styles.header}>
         <img src={PokemonLogo} alt="asdas" />
       </header>
