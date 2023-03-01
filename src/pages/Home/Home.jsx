@@ -11,7 +11,7 @@ import { useGetPokemonsQuery } from '../../services/slices/pokemonSlice';
 const Home = () => {
   const [searchPokemonName, setSearchPokemonName] = useState('');
   const [offset, setOffset] = useState(0);
-  const [limit, setLimit] = useState(12);
+  const [limit] = useState(12);
   const { data: pokemons, isFetching } = useGetPokemonsQuery({ offset, limit });
 
   return (

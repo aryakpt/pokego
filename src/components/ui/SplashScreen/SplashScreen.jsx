@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './SplashScreen.module.css';
 import { PokeBall } from '../../../assets/image';
 import { PokemonLogo } from '../../../assets/logo';
-import { createPortal } from 'react-dom';
 
 const SplashScreen = () => {
   return (
