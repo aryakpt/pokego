@@ -1,15 +1,17 @@
 .pokemon-detail-card {
+  background: linear-gradient(to right, rgb(236, 236, 236), var(--secondary-purple));
   border-radius: 10px;
-  width: 1000px;
-  max-width: 100%;
+  max-width: 450px;
+  width: 100%;
   box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
   padding: 20px 30px;
-  background: linear-gradient(to right, rgb(236, 236, 236), var(--secondary-purple));
+  min-height: 600px;
 
   display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 2rem;
-
-  position: relative;
+  z-index: 2;
 }
 
 .backdrop {
@@ -24,25 +26,42 @@
 }
 
 .pokemon-detail-card__header {
+  position: relative;
+  width: 80%;
   background-color: white;
   box-shadow: 0px 0px 4px 2px rgb(228, 228, 228);
+
   border-radius: 20px;
-  width: 40%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  padding-inline: 20px;
+}
+
+.pokemon-detail-card__header > img {
+  width: 50%;
+  object-fit: contain;
+  margin-inline: auto;
+  z-index: 1;
+  transform: scale(1.25);
+}
+
+.pokemon-detail-card__header__title {
+  color: var(--primary-color);
   position: relative;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
 }
 
 .order {
   position: absolute;
-  top: 0;
+  top: 30%;
   left: 50%;
-  transform: translateX(-50%);
-  font-size: 120px;
+  transform: translate(-50%, -50%);
+  font-size: 5rem;
   color: rgb(190, 190, 190);
   filter: blur(3px);
+  z-index: 0;
+  overflow: hidden;
 }
 
 .detail-fisik {
@@ -69,25 +88,11 @@
   right: -10px;
 }
 
-.pokemon-detail-card__header img {
-  height: 50%;
-  width: 50%;
-  object-fit: contain;
-  margin-inline: auto;
-  z-index: 1;
-}
-
 .ability__item {
   padding: 5px;
   border-radius: 5px;
   background-color: var(--tertary-purple);
   font-size: 12px;
-  z-index: 1;
-}
-
-.pokemon-detail-card__header__title {
-  text-align: center;
-  color: var(--primary-color);
   z-index: 1;
 }
 
@@ -110,17 +115,36 @@
   display: flex;
   gap: 10px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .elements img {
-  width: 15%;
+  width: 13%;
 }
 
 .pokemon-detail-card__body {
-  width: 60%;
-  height: 100%;
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
+
 .pokemon-detail-card__body button {
   margin-top: 20px;
   float: right;
+}
+
+@media (min-width: 900px) {
+  .pokemon-detail-card {
+    flex-direction: row;
+    max-width: 75%;
+    min-height: 100%;
+  }
+  .pokemon-detail-card__header {
+    width: 40%;
+  }
+  .pokemon-detail-card__body {
+    width: 60%;
+  }
 }
