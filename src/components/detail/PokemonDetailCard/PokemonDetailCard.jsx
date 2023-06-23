@@ -17,7 +17,14 @@ import { Elements } from '../../../constants/elements';
 
 import { Button } from '../../';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const PokemonDetailCard = ({ pokemon }) => {
   const dataChart = {
@@ -75,7 +82,10 @@ const PokemonDetailCard = ({ pokemon }) => {
               <div className={styles['abilities__list']}>
                 {pokemon?.abilities.map((ability) => {
                   return (
-                    <span key={ability.ability.name} className={styles['ability__item']}>
+                    <span
+                      key={ability.ability.name}
+                      className={styles['ability__item']}
+                    >
                       {capitalizeFirstLetter(ability.ability.name)}
                     </span>
                   );

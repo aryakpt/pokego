@@ -7,6 +7,7 @@ import { PokemonCard } from '../../components/home';
 import { PokemonLogo } from '../../assets/logo';
 
 import { useGetPokemonsQuery } from '../../services/slices/pokemonSlice';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [searchPokemonName, setSearchPokemonName] = useState('');
@@ -16,6 +17,9 @@ const Home = () => {
 
   return (
     <Container isApiLoading={isFetching}>
+      <Link to={'/game'} className={styles['btn-game']}>
+        <Button type="primary">Play Game!</Button>
+      </Link>
       <header className={styles.header}>
         <img src={PokemonLogo} alt="asdas" />
       </header>

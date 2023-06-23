@@ -1,9 +1,7 @@
 .button {
-  background-color: transparent;
-
   display: flex;
   gap: 10px;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
   border: none;
@@ -22,6 +20,19 @@
   font-size: 1rem;
 }
 
+.button-primary:hover img {
+  animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .button-primary:disabled {
   filter: grayscale(50%);
   cursor: not-allowed;
@@ -30,8 +41,6 @@
 .icon {
   display: flex;
   align-items: center;
-  width: 100%;
-  right: 0;
 }
 
 .icon img {
