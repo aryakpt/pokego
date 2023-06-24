@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container } from '../../components/layout';
 import { Button } from '../../components';
 import { Link } from 'react-router-dom';
@@ -7,12 +7,15 @@ import {
   startGame,
   setQuestions,
   changeState,
+  gameOver,
+  defaultState,
 } from '../../services/slices/gameSlice';
 
 import { useGetPokemonsQuery } from '../../services/slices/pokemonSlice';
 
 import styles from './Game.module.css';
 import { QuestionCard } from '../../components/game';
+import GameModal from '../../components/game/GameModal/GameModal';
 
 const Game = () => {
   const dispatch = useDispatch();
@@ -24,12 +27,28 @@ const Game = () => {
 
   const startTheGame = () => {
     if (isSuccessPokemons) {
-      dispatch(changeState({ isGameLoading: true }));
+      dispatch(changeState({ data: pokemons.results }));
       dispatch(startGame());
       dispatch(setQuestions(pokemons?.results));
-      dispatch(changeState({ isGameLoading: false }));
     }
   };
+
+  useEffect(() => {
+    if (gameState.isGameStart) {
+      const timer = setInterval(() => {
+        if (gameState.countdown >= 1) {
+          dispatch(changeState({ countdown: gameState.countdown - 1 }));
+        } else {
+          dispatch(gameOver());
+        }
+      }, 1000);
+      return () => clearInterval(timer);
+    }
+  }, [gameState.countdown, gameState.isGameStart]);
+
+  useEffect(() => {
+    dispatch(setQuestions(gameState.data || pokemons?.results));
+  }, [gameState.numOfQuestion]);
 
   const beforeGame = (
     <div className={styles['pokemon-game__cover']}>
@@ -61,23 +80,28 @@ const Game = () => {
     </div>
   );
 
+  const inGame = (
+    <>
+      {gameState.isGameOver ? (
+        <GameModal pokemons={pokemons.results} />
+      ) : (
+        <QuestionCard />
+      )}
+    </>
+  );
+
   return (
     <Container>
       <div className={styles['primary-button']}>
-        <Link to={'/'}>
-          <Button>Back</Button>
+        <Link
+          to={'/'}
+          onClick={() => dispatch(changeState({ ...defaultState }))}
+        >
+          <Button>Quit Game</Button>
         </Link>
       </div>
       <div className={styles['pokemon-game__main']}>
-        {!gameState.isStart && beforeGame}
-        {gameState.isStart && gameState.answer && (
-          <>
-            <QuestionCard
-              questions={gameState?.questions}
-              answer={gameState?.answer}
-            />
-          </>
-        )}
+        {!gameState.isGameStart && !gameState.isGameOver ? beforeGame : inGame}
       </div>
     </Container>
   );

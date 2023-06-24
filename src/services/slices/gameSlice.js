@@ -1,14 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { randomInteger } from '../../utils';
 
-const initialState = {
-  isStart: false,
+export const defaultState = {
+  isGameStart: false,
   isGameOver: false,
+  countdown: 100,
+  numOfQuestion: 0,
+  score: 0,
+};
+
+const initialState = {
+  data: [],
+  isGameStart: false,
+  isGameOver: false,
+  countdown: 100,
   numOfQuestion: 0,
   score: 0,
   questions: [],
   answer: {},
-  isGameLoading: false,
 };
 
 export const gameSlice = createSlice({
@@ -24,8 +33,15 @@ export const gameSlice = createSlice({
     startGame: (state) => {
       return {
         ...state,
-        isStart: true,
-        numOfQuestion: state.numOfQuestion + 1,
+        ...defaultState,
+        isGameStart: true,
+      };
+    },
+    gameOver: (state) => {
+      return {
+        ...state,
+        isGameStart: false,
+        isGameOver: true,
       };
     },
     setQuestions: (state, { payload }) => {
@@ -34,12 +50,27 @@ export const gameSlice = createSlice({
       const questionList = payload.slice(slicedIdx, slicedIdx + 4);
       return {
         ...state,
-        numOfQuestion: state.numOfQuestion + 1,
         questions: [...questionList],
         answer: { ...questionList[correctAnsIndex] },
+      };
+    },
+    checkAnswer: (state, { payload }) => {
+      if (state.answer.name === payload) {
+        setQuestions(state.data);
+        return {
+          ...state,
+          score: state.score + 1,
+          numOfQuestion: state.numOfQuestion + 1,
+        };
+      }
+      setQuestions(state.data);
+      return {
+        ...state,
+        numOfQuestion: state.numOfQuestion + 1,
       };
     },
   },
 });
 
-export const { changeState, startGame, setQuestions } = gameSlice.actions;
+export const { changeState, startGame, setQuestions, checkAnswer, gameOver } =
+  gameSlice.actions;
