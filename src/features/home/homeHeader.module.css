@@ -1,0 +1,10 @@
+.home-header {
+  text-align: center;
+  padding-block: 30px;
+  transform-origin: center center;
+}
+
+.home-header img {
+  width: 250px;
+  min-width: 30%;
+}
