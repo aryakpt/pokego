@@ -35,7 +35,7 @@ const PokemonCard = ({ pokemon }) => {
               })}
             </div>
           </div>
-          <div>#{data?.order}</div>
+          <div className={styles["pokemon-card__order"]}>#{data?.order}</div>
         </Link>
       </li>
     );

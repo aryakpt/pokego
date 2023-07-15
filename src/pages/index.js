@@ -1,4 +1,5 @@
 import HomePage from './homePage';
-import Detail from './Detail/Detail';
+import DetailPage from './detailPage';
+import GamePage from './gamePage';
 
-export { HomePage, Detail };
+export { HomePage, DetailPage, GamePage };

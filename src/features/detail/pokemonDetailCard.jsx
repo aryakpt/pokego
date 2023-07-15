@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styles from './PokemonDetailCard.module.css';
+import styles from './pokemonDetailCard.module.css';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,11 +11,11 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
-import { capitalizeFirstLetter } from '../../../utils';
+import { capitalizeFirstLetter } from '../../utils';
 
-import { Elements } from '../../../constants/elements';
+import { Elements } from '../../constants/elements';
 
-import { Button } from '../../';
+import { Button } from '../../components';
 
 ChartJS.register(
   CategoryScale,
@@ -91,7 +91,7 @@ const PokemonDetailCard = ({ pokemon }) => {
                   );
                 })}
               </div>
-              <p>Species: {pokemon?.species?.name}</p>
+              <p>Species: {capitalizeFirstLetter(pokemon?.species?.name)}</p>
               <div className={styles.elements}>
                 {pokemon?.types.map((type) => {
                   return (

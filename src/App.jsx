@@ -1,9 +1,8 @@
 import './styles/global.css';
-import { HomePage, Detail } from './pages';
+import { HomePage, DetailPage, GamePage } from './pages';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './services/store';
-import Game from './pages/Game/Game';
 
 function App() {
   return (
@@ -11,8 +10,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/detail/:pokemonName" element={<Detail />} />
-          <Route path="/game" element={<Game />} />
+          <Route path="/detail/:pokemonName" element={<DetailPage />} />
+          <Route path="/game" element={<GamePage />} />
         </Routes>
       </BrowserRouter>
     </Provider>

@@ -1,3 +1,3 @@
-import PokemonDetailCard from './PokemonDetailCard/PokemonDetailCard';
+import PokemonDetailCard from './pokemonDetailCard';
 
 export { PokemonDetailCard };
