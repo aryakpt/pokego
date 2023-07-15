@@ -5,18 +5,17 @@ import { checkAnswer } from '../../services/slices/gameSlice';
 import { Button } from '../../components';
 import { PokeBall } from '../../assets/image';
 import styles from './gameQuestionCard.module.css';
+import { capitalizeFirstLetter } from '../../utils';
 
 const GameQuestionCard = () => {
   const gameState = useSelector((state) => state.game);
   const dispatch = useDispatch();
   const [message, setMessage] = useState('');
-  const [inputAnswer, setInputAnswer] = useState('');
   const { data: currentAnswer, isSuccess } = useGetPokemonByNameQuery(
     gameState?.answer?.name
   );
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
+  const onCheckAnswer = (inputAnswer) => {
     if (inputAnswer) {
       dispatch(checkAnswer(inputAnswer));
       setMessage(
@@ -24,7 +23,6 @@ const GameQuestionCard = () => {
           ? `Sorry, you are wrong! The answer is ${gameState.answer.name}`
           : 'Congratulations, you are right!'
       );
-      setInputAnswer('');
     } else {
       setMessage('Sorry, you must answer it first!');
     }
@@ -37,40 +35,38 @@ const GameQuestionCard = () => {
         alt={currentAnswer?.name}
         className={styles.imageQuestion}
       />
+      <div className={styles.questionDescription}>
+        <div className={styles.questionDescriptionPhysic}>
+          <span>{currentAnswer?.weight} lbs</span>
+          <span>{currentAnswer?.height} inch</span>
+        </div>
+        <div className={styles.abilitiesList}>
+          {currentAnswer?.abilities.map((ability) => {
+            return (
+              <span key={ability.ability.name} className={styles.abilityItem}>
+                {capitalizeFirstLetter(ability.ability.name)}
+              </span>
+            );
+          })}
+        </div>
+      </div>
       <div className={styles.cardQuestionDetail}>
         <div className={styles.cardQuestionInformation}>
           <p>Point: {gameState.score}</p>
           <p>Time: {gameState.countdown} s</p>
         </div>
         <p className={styles.cardQuestionMessage}>{message}</p>
-        <form onSubmit={onSubmitHandler} className={styles.cardQuestionForm}>
-          <div className={styles.cardQuestionFormRadio}>
-            {gameState.questions.map((question) => {
-              return (
-                <div
-                  key={question.name}
-                  className={styles.cardQuestionFormRadioItem}
-                >
-                  <input
-                    type="radio"
-                    name="answer_choice"
-                    value={question.name}
-                    onClick={(e) => setInputAnswer(e.target.value)}
-                    disabled={gameState.isGameOver}
-                  />
-                  <label htmlFor="answer_choice">
-                    {question.name.toUpperCase()}
-                  </label>
-                </div>
-              );
-            })}
-          </div>
-          <div className={styles.cardQuestionFormButton}>
-            <Button type="submit" disabled={gameState.isGameOver}>
-              Answer
-            </Button>
-          </div>
-        </form>
+        <div className={styles.cardQuestionFormRadio}>
+          {gameState.questions.map((question) => {
+            return (
+              <Button
+                defaultProps={{ onClick: () => onCheckAnswer(question.name) }}
+              >
+                {capitalizeFirstLetter(question.name)}
+              </Button>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

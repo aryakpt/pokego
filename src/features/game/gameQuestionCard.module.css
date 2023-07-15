@@ -37,13 +37,33 @@
   margin-bottom: 2rem;
 }
 
-.cardQuestionFormRadioItem {
+.cardQuestionFormRadio button {
   flex-basis: 48%;
   display: flex;
   gap: 10px;
 }
 
-.cardQuestionFormButton {
+.abilitiesList {
   display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.abilityItem {
+  padding: 5px;
+  border-radius: 5px;
+  background-color: var(--tertary-purple);
+  font-size: 12px;
+  z-index: 1;
+}
+.questionDescription {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.questionDescriptionPhysic {
+  display: flex;
+  gap: 10px;
   justify-content: center;
 }

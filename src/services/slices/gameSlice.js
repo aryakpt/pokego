@@ -55,15 +55,14 @@ export const gameSlice = createSlice({
       };
     },
     checkAnswer: (state, { payload }) => {
+      setQuestions(state.data);
       if (state.answer.name === payload) {
-        setQuestions(state.data);
         return {
           ...state,
           score: state.score + 1,
           numOfQuestion: state.numOfQuestion + 1,
         };
       }
-      setQuestions(state.data);
       return {
         ...state,
         numOfQuestion: state.numOfQuestion + 1,

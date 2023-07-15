@@ -59,8 +59,8 @@ const GamePage = () => {
         <ol>
           <li>Choose the most appropriate pokemon name.</li>
           <li>
-            You will be given a clue in the form of pictures, abilities,
-            movements, weight, and height of the pokemon
+            You will be given a clue in the form of pictures, abilities, weight,
+            and height of the pokemon
           </li>
           <li>You will be given 100 seconds to guess the Pokemon's name</li>
           <li>
