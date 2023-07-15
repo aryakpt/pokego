@@ -1,6 +1,10 @@
-# Fanintek Coding Test
+# Pokego V1
 
-Aplikasi react tentang pokemon, menggunakan pokeapi
+Pokego is a web that explains details about Pokemon and there is a Pokemon guessing game in it.
+
+Free API from [pokeapi](https://pokeapi.co/)
+
+If you want to learn about programming, you can use that free API and makes whatever you want! Just do it guys! I'm still learning too LOL :)
 
 ## Available Scripts
 
