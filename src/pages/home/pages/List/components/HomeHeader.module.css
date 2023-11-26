@@ -1,0 +1,10 @@
+.homeHeader {
+  text-align: center;
+  padding-block: 30px;
+  transform-origin: center center;
+}
+
+.homeHeader img {
+  width: 250px;
+  min-width: 30%;
+}
