@@ -1,15 +1,15 @@
-.gameModal {
+.gameOverCard {
   background-color: rgba(255, 255, 255, 0.219);
   padding: 2rem;
   border-radius: 15px;
   box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.05);
 }
 
-.gameModal h1 {
+.gameOverCard h1 {
   margin-bottom: 2rem;
 }
 
-.gameModal div {
+.gameOverCard div {
   display: flex;
   justify-content: center;
 }

@@ -1,13 +1,11 @@
-.primary-button {
+.primaryButton {
   position: absolute;
   top: 2%;
   left: 2%;
-}
-.primary-button a {
   text-decoration: none;
 }
 
-.pokemon-game__main {
+.pokemonGame {
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -15,7 +13,7 @@
   align-items: center;
 }
 
-.pokemon-game__cover {
+.pokemonGameCover {
   width: 100%;
   max-width: 800px;
   position: absolute;
@@ -34,15 +32,15 @@
   gap: 3rem;
 }
 
-.pokemon-game__cover h1 {
+.pokemonGameCover h1 {
   text-align: center;
 }
 
-.pokemon-game__cover__rules {
+.pokemonGameCoverRules {
   padding-inline: 3rem;
 }
 
-.pokemon-game__cover__btn {
+.pokemonGameCoverButton {
   display: flex;
   justify-content: center;
 }

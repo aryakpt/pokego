@@ -1,6 +1,6 @@
-import React from 'react';
-import Navbar from '../Navbar/Navbar';
-import styles from './DefaultLayout.module.css';
+import React from "react";
+import Navbar from "../Navbar/Navbar";
+import styles from "./DefaultLayout.module.css";
 
 const DefaultLayout = ({ children }) => {
   return (

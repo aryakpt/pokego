@@ -1,30 +1,34 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useGetPokemonByNameQuery } from '../../services/slices/pokemonSlice';
-import { checkAnswer } from '../../services/slices/gameSlice';
-import { Button } from '../../components';
-import { PokeBall } from '../../assets/image';
-import styles from './gameQuestionCard.module.css';
-import { capitalizeFirstLetter } from '../../utils';
+import React, { useState } from "react";
+import { useGetPokemonByNameQuery } from "../../../api";
+import { Button } from "../../../../../components";
+import { PokeBall } from "../../../../../assets/image";
+import styles from "./GameQuestionCard.module.css";
+import { capitalizeFirstLetter } from "../../../../../utils/helpers";
+import { useGameContext } from "../../../context/GameCtx";
+import { PokemonListResultSchema } from "../../../api/schemas";
 
-const GameQuestionCard = () => {
-  const gameState = useSelector((state) => state.game);
-  const dispatch = useDispatch();
-  const [message, setMessage] = useState('');
+interface GameQuestionCardProps {
+  pokemons: PokemonListResultSchema[];
+}
+const GameQuestionCard = (props: GameQuestionCardProps) => {
+  const { pokemons } = props;
+  const { state, checkAnswer, createQuestion } = useGameContext();
+  const [message, setMessage] = useState("");
   const { data: currentAnswer, isSuccess } = useGetPokemonByNameQuery(
-    gameState?.answer?.name
+    state?.correctAnswer?.name
   );
 
-  const onCheckAnswer = (inputAnswer) => {
+  const onCheckAnswer = (inputAnswer: string) => {
     if (inputAnswer) {
-      dispatch(checkAnswer(inputAnswer));
+      const isCorrect = checkAnswer(inputAnswer);
       setMessage(
-        inputAnswer !== gameState.answer.name
-          ? `Sorry, you are wrong! The answer is ${gameState.answer.name}`
-          : 'Congratulations, you are right!'
+        !isCorrect
+          ? `Sorry, you are wrong! The answer is ${state.correctAnswer.name}`
+          : "Congratulations, you are right!"
       );
+      createQuestion(pokemons);
     } else {
-      setMessage('Sorry, you must answer it first!');
+      setMessage("Sorry, you must answer it first!");
     }
   };
 
@@ -52,15 +56,17 @@ const GameQuestionCard = () => {
       </div>
       <div className={styles.cardQuestionDetail}>
         <div className={styles.cardQuestionInformation}>
-          <p>Point: {gameState.score}</p>
-          <p>Time: {gameState.countdown} s</p>
+          <p>Point: {state.currScore}</p>
+          <p>Time: {state.countdown} s</p>
         </div>
         <p className={styles.cardQuestionMessage}>{message}</p>
         <div className={styles.cardQuestionFormRadio}>
-          {gameState.questions.map((question) => {
+          {state.questions.map((question) => {
             return (
               <Button
-                defaultProps={{ onClick: () => onCheckAnswer(question.name) }}
+                key={question.name}
+                variant="primary"
+                onClick={() => onCheckAnswer(question.name)}
               >
                 {capitalizeFirstLetter(question.name)}
               </Button>

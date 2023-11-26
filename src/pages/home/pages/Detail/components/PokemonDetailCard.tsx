@@ -11,7 +11,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { capitalizeFirstLetter } from "../../../../../utils";
+import { capitalizeFirstLetter } from "../../../../../utils/helpers";
 import { Elements } from "../../../constants";
 import { Button } from "../../../../../components";
 import { homeRoutes } from "pages/home/routes";

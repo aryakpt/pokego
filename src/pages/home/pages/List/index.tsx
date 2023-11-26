@@ -1,13 +1,10 @@
-// CORES
 import React, { useState } from "react";
 import { useRouteParams } from "typesafe-routes/react-router";
 import { homeRoutes } from "../../routes";
 import { Link } from "react-router-dom";
 
-// STYLES
 import styles from "./List.module.css";
 
-// UIs
 import { Container } from "../../../../components/layout";
 import { Button } from "../../../../components";
 
@@ -18,7 +15,6 @@ import {
   HomePokemonList,
 } from "./components";
 
-// APIs
 import { useGetPokemonsQuery } from "../../api";
 
 const ListPage = () => {
@@ -33,7 +29,7 @@ const ListPage = () => {
 
   return (
     <Container isApiLoading={isFetching}>
-      <Link to={"/game"} className={styles["btn-game"]}>
+      <Link to={homeRoutes.game({}).$} className={styles["btn-game"]}>
         <Button variant="primary">Play Game!</Button>
       </Link>
       <HomeHeader />

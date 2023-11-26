@@ -1,4 +1,4 @@
-.splash_screen {
+.splashScreen {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -9,7 +9,7 @@
   filter: blur(10%);
 }
 
-.splash_screen__content {
+.splashScreenContent {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -21,11 +21,11 @@
   z-index: 100;
 }
 
-.splash_screen__content__logo {
+.splashScreenContentLogo {
   width: 300px;
 }
 
-.splash_screen__content__pokeball {
+.splashScreenContentPokeball {
   width: 40px;
   animation: spin 1.5s infinite linear;
 }

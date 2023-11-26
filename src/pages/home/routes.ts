@@ -10,4 +10,5 @@ export const homeRoutes = {
     {}
   ),
   detail: route(`detail/:pokemonName`, { pokemonName: stringParser }, {}),
+  game: route(`poke-game`, {}, {}),
 };
