@@ -6,15 +6,15 @@ import { PokemonLogo } from "../../../assets/logo";
 const SplashScreen = () => {
   return (
     <>
-      <div className={styles.splachScreen}></div>
-      <div className={styles.splachScreenContent}>
+      <div className={styles.splashScreen}></div>
+      <div className={styles.splashScreenContent}>
         <img
-          className={styles.splachScreenContentLogo}
+          className={styles.splashScreenContentLogo}
           src={PokemonLogo}
           alt=""
         />
         <img
-          className={styles.splachScreenContentPokeball}
+          className={styles.splashScreenContentPokeball}
           src={PokeBall}
           alt=""
         />
