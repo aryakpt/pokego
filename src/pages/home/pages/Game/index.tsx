@@ -1,22 +1,22 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import styles from "./Game.module.css";
+import React, {useEffect} from 'react';
+import {Link} from 'react-router-dom';
 
-import { Container } from "../../../../components/layout";
-import { Button } from "../../../../components";
-import { GameQuestionCard, GameOverCard } from "./components";
+import styles from './Game.module.css';
 
-import { useGetPokemonsQuery } from "../../api";
-import { useGameContext } from "../../context/GameCtx";
+import {Container} from '../../../../components/layout';
+import {Button} from '../../../../components';
+import {GameQuestionCard, GameOverCard, GameLeaderboard} from './components';
 
-import { paths } from "../../../../routes/paths";
-import { homeRoutes } from "../../routes";
+import {useGetPokemonsQuery} from '../../api';
+import {useGameContext} from '../../context/GameCtx';
+
+import {paths} from '../../../../routes/paths';
+import {homeRoutes} from '../../routes';
 
 const GamePage = () => {
-  const { state, setState, startGame, endGame, createQuestion } =
-    useGameContext();
+  const {state, setState, startGame, endGame, createQuestion} = useGameContext();
 
-  const { data: pokemons, isSuccess: isSuccessPokemons } = useGetPokemonsQuery({
+  const {data: pokemons, isSuccess: isSuccessPokemons} = useGetPokemonsQuery({
     offset: 0,
     limit: 100,
   });
@@ -31,11 +31,8 @@ const GamePage = () => {
   useEffect(() => {
     if (state.isStart) {
       const timer = setInterval(() => {
-        if (state.countdown >= 1) {
-          setState((prev) => ({ ...prev, countdown: state.countdown - 1 }));
-        } else {
-          endGame();
-        }
+        if (state.countdown >= 1) setState((prev) => ({...prev, countdown: state.countdown - 1}));
+        else endGame();
       }, 1000);
       return () => clearInterval(timer);
     }
@@ -48,42 +45,40 @@ const GamePage = () => {
         <h3>Rules:</h3>
         <ol>
           <li>Choose the most appropriate pokemon name.</li>
+          <li>You will be given a clue in the form of pictures, abilities, weight, and height of the pokemon</li>
+          <li>You will be given {state.countdown} seconds to guess the Pokemon's name</li>
           <li>
-            You will be given a clue in the form of pictures, abilities, weight,
-            and height of the pokemon
-          </li>
-          <li>You will be given 100 seconds to guess the Pokemon's name</li>
-          <li>
-            Correct answer, score increases 1. Wrong answer, no score reduction
-            and continues on to the next question
+            Correct answer, score increases 2. Wrong answer, score decreaces 0.5 and continues on to the next question
           </li>
         </ol>
       </div>
+      <div className={styles.pokemonGameCoverInputName}>
+        <input
+          type="text"
+          value={state.playerName}
+          placeholder="Please input your name..."
+          onChange={(e) => {
+            if (e.target.value.length <= 15) setState((prev) => ({...prev, playerName: e.target.value}));
+          }}
+        />
+      </div>
       <div className={styles.pokemonGameCoverButton}>
-        <Button variant="primary" onClick={gameStartHandler}>
+        <Button variant="primary" onClick={gameStartHandler} disabled={!state.playerName}>
           Start Game
         </Button>
       </div>
     </div>
   );
 
-  const inGame = state.isOver ? (
-    <GameOverCard />
-  ) : (
-    <GameQuestionCard pokemons={pokemons?.results || []} />
-  );
+  const inGame = state.isOver ? <GameOverCard /> : <GameQuestionCard pokemons={pokemons?.results || []} />;
 
   return (
     <Container>
-      <Link
-        className={styles.primaryButton}
-        to={paths.home + homeRoutes.list({}).$}
-      >
+      <Link className={styles.primaryButton} to={paths.home + homeRoutes.list({}).$}>
         <Button variant="primary">Quit Game</Button>
       </Link>
-      <div className={styles.pokemonGame}>
-        {state.isStart ? inGame : beforeGame}
-      </div>
+      <GameLeaderboard />
+      <div className={styles.pokemonGame}>{state.isStart ? inGame : beforeGame}</div>
     </Container>
   );
 };

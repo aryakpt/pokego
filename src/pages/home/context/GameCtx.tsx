@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useState } from "react";
-import { PokemonListResultSchema } from "../api/schemas";
-import { randomInteger } from "../../../utils/helpers";
+import React, {createContext, useContext, useState} from 'react';
+import {PokemonListResultSchema} from '../api/schemas';
+import {randomInteger} from '../../../utils/helpers';
 
 interface GameContextValue {
   state: StateValue;
@@ -16,8 +16,7 @@ const GameContext = createContext<GameContextValue | undefined>(undefined);
 
 export const useGameContext = () => {
   const context = useContext(GameContext);
-  if (!context)
-    throw new Error("useGameContext must be used within a GameProvider");
+  if (!context) throw new Error('useGameContext must be used within a GameProvider');
   return context;
 };
 
@@ -25,7 +24,12 @@ interface GameProviderProps {
   children: React.ReactNode;
 }
 
+export interface LeaderboardData {
+  playerName: string;
+  points: number;
+}
 interface StateValue {
+  playerName: string;
   isStart: boolean;
   isOver: boolean;
   countdown: number;
@@ -35,30 +39,39 @@ interface StateValue {
 }
 
 const initialState: StateValue = {
+  playerName: '',
   isStart: false,
   isOver: false,
   countdown: 60,
   currScore: 0,
   questions: [],
   correctAnswer: {
-    name: "",
-    url: "",
+    name: '',
+    url: '',
   },
 };
 
 export const GameProvider = (props: GameProviderProps) => {
-  const { children } = props;
+  const {children} = props;
   const [state, setState] = useState<StateValue>(initialState);
 
   const startGame = () => {
-    setState((prev) => ({ ...prev, isStart: true }));
+    setState((prev) => ({...prev, isStart: true}));
   };
 
   const endGame = () => {
-    setState((prev) => ({ ...prev, isOver: true }));
+    setState((prev) => ({...prev, isOver: true}));
   };
 
   const resetGame = () => {
+    const leaderboardData = localStorage.getItem('leaderboard');
+    const newPlayer: LeaderboardData = {playerName: state.playerName, points: state.currScore};
+    if (leaderboardData) {
+      const newLeaderboardData = [...JSON.parse(leaderboardData), newPlayer];
+      localStorage.setItem('leaderboard', JSON.stringify(newLeaderboardData));
+    } else {
+      localStorage.setItem('leaderboard', JSON.stringify([newPlayer]));
+    }
     setState(initialState);
   };
 
@@ -70,21 +83,26 @@ export const GameProvider = (props: GameProviderProps) => {
     setState((prev) => ({
       ...prev,
       questions: [...questionList],
-      correctAnswer: { ...questionList[correctAnsIdx] },
+      correctAnswer: {...questionList[correctAnsIdx]},
     }));
   };
 
   const checkAnswer = (pokemonName: string) => {
-    const { correctAnswer, currScore } = state;
+    const {correctAnswer} = state;
 
     if (pokemonName === correctAnswer.name) {
       setState((prev) => ({
         ...prev,
-        currScore: currScore + 1,
+        currScore: prev.currScore + 2,
       }));
       return true;
+    } else {
+      setState((prev) => ({
+        ...prev,
+        currScore: prev.currScore === 0 ? prev.currScore : prev.currScore - 0.5,
+      }));
+      return false;
     }
-    return false;
   };
 
   const contextValue = {
