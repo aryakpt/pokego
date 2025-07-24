@@ -42,7 +42,7 @@ const initialState: StateValue = {
   playerName: '',
   isStart: false,
   isOver: false,
-  countdown: 60,
+  countdown: 30,
   currScore: 0,
   questions: [],
   correctAnswer: {
